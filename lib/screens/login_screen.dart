@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -81,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+
             // Login Button
             Container(
               width: double.infinity,
@@ -95,7 +97,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print('Login Successful!!');
+
+                    final email = _emailController.text;
+                    final password = _passwordController.text;
+
+                    AuthService().createUser(email, password);
+
+
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Login Successful'),
+                      backgroundColor: Colors.green,
+                    ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Email or Password Cannot be empty'),
