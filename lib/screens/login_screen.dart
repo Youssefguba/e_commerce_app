@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import 'home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -104,10 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     AuthService().createUser(email, password);
 
 
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Login Successful'),
-                      backgroundColor: Colors.green,
-                    ));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Email or Password Cannot be empty'),
